@@ -1,7 +1,7 @@
 // src/controllers/user.controller.ts
 import { Request, Response } from 'express';
-import ApiResponse from '../utils/ApiResponse';
-import { query } from '../config/db.config';
+import ApiResponse from '../utils/ApiResponse.js';
+import { query } from '../config/db.config.js';
 
 export async function getUsers(req: Request, res: Response) {
   const result = await query('SELECT * FROM users');

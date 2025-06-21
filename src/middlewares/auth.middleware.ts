@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import ApiResponse from '../utils/ApiResponse';
+import ApiResponse from '../utils/ApiResponse.js';
 
 dotenv.config();
 

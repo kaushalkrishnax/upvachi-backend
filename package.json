@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "bun --watch src/server.ts"
+    "dev": "bun --watch --loader ts-node/esm src/server.ts"
   },
   "repository": {
     "type": "git",

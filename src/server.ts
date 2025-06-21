@@ -6,10 +6,10 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
-import pool from './config/db.config';
-import { errorMiddleware } from './middlewares/error.middleware';
-import userRoutes from './routes/user.routes'
-import { ApiResponse } from './utils/ApiResponse';
+import pool from './config/db.config.js';
+import { errorMiddleware } from './middlewares/error.middleware.js';
+import userRoutes from './routes/user.routes.js'
+import { ApiResponse } from './utils/ApiResponse.js';
 
 dotenv.config();
 

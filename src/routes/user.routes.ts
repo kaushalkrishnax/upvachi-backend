@@ -1,6 +1,6 @@
 // src/routes/user.routes.ts
 import { Router, Request, Response } from 'express';
-import { getUsers } from '../controllers/user.controller';
+import { getUsers } from '../controllers/user.controller.js';
 
 const router = Router();
 
