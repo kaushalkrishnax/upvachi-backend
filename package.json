@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/kaushalkrishnax/upvachi-backend.git"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
