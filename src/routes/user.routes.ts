@@ -1,12 +1,11 @@
-// src/routes/user.routes.ts
-import { Router, Request, Response } from 'express';
-import { getUsers } from '../controllers/user.controller.js';
+import { Router } from "express";
+import { getUsers } from "../controllers/user.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.get('/', getUsers);
-router.get('/test', (req: Request, res: Response) => {
-  res.send('User router test successful!');
-});
+router.use(authMiddleware);
+
+router.get("/", getUsers);
 
 export default router;

@@ -11,7 +11,7 @@ if (!databaseUrl) {
 
 const pool = new Pool({
   connectionString: databaseUrl,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
 });
 
 pool.on("error", err => {
@@ -26,10 +26,7 @@ pool.on("error", err => {
  * @param params - Query parameter values
  * @returns A promise that resolves to the query result
  */
-export async function query(
-  text: string,
-  params: any[] = []
-): Promise<QueryResult> {
+export async function query(text: string, params: any[] = []): Promise<QueryResult> {
   const start = Date.now();
   const result = await pool.query(text, params);
   const duration = Date.now() - start;
@@ -55,9 +52,7 @@ export async function getClient(): Promise<{
 
   const rawQuery: typeof client.query = client.query.bind(client);
 
-  client.query = (async (
-    ...args: Parameters<PoolClient['query']>
-  ): Promise<QueryResult> => {
+  client.query = (async (...args: Parameters<PoolClient["query"]>): Promise<QueryResult> => {
     const start = Date.now();
     const result = await (rawQuery as (...args: any[]) => Promise<QueryResult>)(...args);
     const duration = Date.now() - start;
@@ -66,9 +61,9 @@ export async function getClient(): Promise<{
       const sql =
         typeof args[0] === "string"
           ? args[0]
-          : (args[0] && typeof args[0] === "object" && "text" in args[0])
-            ? (args[0] as { text: string }).text
-            : "";
+          : args[0] && typeof args[0] === "object" && "text" in args[0]
+          ? (args[0] as { text: string }).text
+          : "";
       console.log("📄 Client query", { text: sql, duration, rows: result.rowCount });
     }
 

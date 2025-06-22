@@ -16,12 +16,11 @@ export function ApiResponse<T = any>(
   message: string = "OK",
   data: T | null = null
 ): any {
-  const isSuccess = code <= 400;
   res.status(code).json({
-    success: isSuccess,
+    success: code < 400,
     code,
     message,
-    data,
+    data
   });
   return true;
 }

@@ -1,7 +1,7 @@
 // metaGraphApi.ts
-import axios, { AxiosRequestConfig, Method } from 'axios';
+import axios, { AxiosRequestConfig, Method } from "axios";
 
-const GRAPH_BASE_URL = 'https://graph.facebook.com/v23.0';
+const GRAPH_BASE_URL = "https://graph.facebook.com/v23.0";
 
 /**
  * Options for a Graph API request.
@@ -42,10 +42,7 @@ export interface GraphApiRequestOptions {
  * @returns The parsed JSON response data.
  * @throws If the response status is 4xx or any other error occurs.
  */
-async function request(
-  method: Method,
-  { path, params = {}, data = {}, headers = {}, token }: GraphApiRequestOptions
-) {
+async function request(method: Method, { path, params = {}, data = {}, headers = {}, token }: GraphApiRequestOptions) {
   const url = `${GRAPH_BASE_URL}${path}`;
 
   const config: AxiosRequestConfig = {
@@ -53,14 +50,14 @@ async function request(
     url,
     params: {
       ...params,
-      access_token: token,
+      access_token: token
     },
     data,
     headers: {
-      'Content-Type': 'application/json',
-      ...headers,
+      "Content-Type": "application/json",
+      ...headers
     },
-    validateStatus: status => status < 500, // Only throw on 5xx
+    validateStatus: status => status < 500 // Only throw on 5xx
   };
 
   try {
@@ -69,13 +66,13 @@ async function request(
     if (response.status >= 400) {
       throw {
         status: response.status,
-        error: response.data?.error || response.statusText,
+        error: response.data?.error || response.statusText
       };
     }
 
     return response.data;
   } catch (error: any) {
-    console.error('[GraphAPI] Error:', error);
+    console.error("[GraphAPI] Error:", error);
     throw error;
   }
 }
@@ -88,20 +85,20 @@ export const fbGraphApi = {
   /**
    * Sends a GET request to the Graph API.
    */
-  get: (opts: GraphApiRequestOptions) => request('GET', opts),
+  get: (opts: GraphApiRequestOptions) => request("GET", opts),
 
   /**
    * Sends a POST request to the Graph API.
    */
-  post: (opts: GraphApiRequestOptions) => request('POST', opts),
+  post: (opts: GraphApiRequestOptions) => request("POST", opts),
 
   /**
    * Sends a DELETE request to the Graph API.
    */
-  delete: (opts: GraphApiRequestOptions) => request('DELETE', opts),
+  delete: (opts: GraphApiRequestOptions) => request("DELETE", opts),
 
   /**
    * Sends a PUT request to the Graph API.
    */
-  put: (opts: GraphApiRequestOptions) => request('PUT', opts),
+  put: (opts: GraphApiRequestOptions) => request("PUT", opts)
 };
